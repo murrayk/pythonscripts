@@ -11,6 +11,8 @@ import sys
 from os.path import expanduser
 home = expanduser("~")
 innersxcgpx = home + "/DropBox/innersxc.tcx"
+innersdownhillgpx = home + "/DropBox/innersdownhill.tcx"
+currentgpx = innersdownhillgpx
 
 def _vec2d_dist(p1, p2):
     return (p1[0] - p2[0])**2 + (p1[1] - p2[1])**2
@@ -56,7 +58,7 @@ def ramerdouglas(line, dist):
             ramerdouglas(line[pos + 1:], dist)[1:])
 
 
-with open(innersxcgpx) as myfile:
+with open(currentgpx) as myfile:
     data=myfile.read().replace('\n', '')
     i = 0
     list = [];
@@ -72,7 +74,7 @@ with open(innersxcgpx) as myfile:
         mytuple = (float(m[0])/1000, float(m[1]) ) 
         myline.append( mytuple)
     
-    simplified = ramerdouglas(myline, dist = 0.07)
+    simplified = ramerdouglas(myline, dist = 0.03)
     print len(simplified)
     for m in simplified:
         print '<item>' + str(m[0]) + ',' + str(m[1]) + '</item>';
