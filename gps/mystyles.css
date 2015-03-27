@@ -1,0 +1,277 @@
+
+
+
+
+
+#contoursnt [zoom >=13] {
+line-smooth:1;
+line-width:0.75;
+line-color:hsla(89, 9%, 40%, 0.5);
+[zoom = 13] {
+line-width:0.5;
+line-color:hsla(100,30%,50%,15%);
+}
+}
+
+@boldcontours: 3;
+@weakercontours: 1.5;
+
+#contoursnt [zoom >=13][PROP_VALUE=~'.*00'] {
+     
+  	line-width:@boldcontours;
+
+   }
+
+#contoursnt [zoom >=13][PROP_VALUE=~'.*50'] {
+     
+  	line-width:@weakercontours;
+
+   }
+
+#contoursnt [zoom >=15][PROP_VALUE=~'.*00'] {
+     text-allow-overlap:false;
+  text-spacing:200;
+  	line-width:@boldcontours;
+      text-placement:line;
+    text-name:[PROP_VALUE];
+    text-size:9;
+    text-fill:gray;
+      text-face-name:@sans;
+  text-dy: 4;
+   }
+
+#contoursnt [zoom >=15][PROP_VALUE=~'.*50'] {
+     text-allow-overlap:false;
+   text-spacing:200;
+  	line-width:@weakercontours;
+      text-placement:line;
+    text-name:[PROP_VALUE];
+    text-size:7;
+    text-fill:gray;
+      text-face-name:@sans;
+  text-dy: 4;
+   }
+
+
+#color-relief, #hill-shade, #slope-shade  {
+     raster-scaling: bilinear;
+    // note: in TileMill 0.9.x and earlier this is called raster-mode
+    raster-comp-op: multiply;
+}
+#color-relief { raster-opacity: 0.5;}
+#hill-shade { raster-opacity: 0.3; }
+#slope-shade { raster-opacity: 0.2; }
+
+#routes-green {line-smooth:1.0; line-width:1; line-color:green}
+
+
+@arrowsZoom:             14;
+
+.green-route[zoom>14], .black-route[zoom>14], .blue-route[zoom>14], 
+.red-route[zoom>14], .orange-route[zoom>14] {
+marker-file:url("shape://arrow");
+  marker-width:10;
+  marker-placement:line;
+  marker-line-width:0;
+  marker-line-opacity:1;
+
+  marker-transform:translate(0,5);
+}
+.black-route[zoom>14]{
+  	marker-fill:black;
+  }
+.green-route[zoom>14]{
+  	marker-fill:green;
+  }
+.red-route[zoom>14] {
+  	marker-fill:red;
+    [routelabel="Razor rock"] {
+    marker-fill:black;
+  }
+  }
+  
+  .orange-route[zoom>14]{
+  	marker-fill:#B26200;
+  	}
+  
+
+.blue-route[zoom>14]{
+  	marker-fill:blue;
+  }
+
+#hills [zoom >=12] {
+  marker-file:url("icons/triangle-12.svg");
+  marker-width: 6;
+  marker-height: 6;
+  marker-fill:#f45;
+  marker-line-color:#871032;
+  marker-allow-overlap:false;
+  text-name: '[name]';
+  [ele!='']{
+  text-name: '[name] + " (" + [ele] + ")"';
+  }
+  text-face-name: @sans_lt_italic;
+  text-placement:point;
+  text-placements: "N,S,E,W,NE,SE,NW,SW,20,18,16";
+  text-halo-fill:@other_halo;
+  text-halo-radius:0.5;
+  text-wrap-width: 30;
+  text-size: 12;
+  text-dy: 4;
+  text-dx: 4;
+  [zoom >=14]{
+      marker-width: 8;
+      marker-height: 8;
+      text-placements: "N,S,E,W,NE,SE,NW,SW,20,18,16";
+      text-dy: 6;
+  	  text-dx: 6;
+   }
+}
+
+#poi[zoom>12] {
+  [type='parking']{
+    marker-file:url("maki/parking-18.svg");
+  }
+   [type='cafe']{
+    marker-file:url("maki/cafe-18.svg");
+  }
+   [type='info']{
+    marker-file:url("maki/bicycle-18.svg");
+  }
+  
+  marker-width: 12;
+  marker-height: 12;
+  marker-fill:#2F4F4F;
+  marker-line-color:#2F4F4F;
+  marker-allow-overlap:true;
+  text-name: '[name]';
+
+  text-face-name: @sans;
+
+  text-placement: point;
+      text-dy: 6;
+  	  text-dx: 6;
+  text-placements: "N,S,E,W,NE,SE,NW,SW,20,18,16";
+  text-halo-fill:@other_halo;
+  text-halo-radius:0.5;
+
+  
+   [zoom=13] [type='info'] {
+    text-size:11;
+    text-allow-overlap:false;
+
+  }
+   [zoom=13] [type='cafe'] {
+    text-size:0;
+  }
+     [zoom=13] [type='parking'] {
+    text-size:0;
+  }
+  [zoom=14]  [type='info']{
+    text-size:12;
+    text-allow-overlap:false;
+
+  }
+  [zoom=15] [type='info']{
+    text-size:13;
+text-allow-overlap:true;
+      marker-width: 18;
+  marker-height: 18;
+   }
+   [zoom=16]{
+		text-size:14;
+          marker-width: 19;
+  marker-height: 19;
+    text-allow-overlap:true;
+    }
+     [zoom=17]{
+     text-size:16 ;
+          marker-width: 19;
+  marker-height: 19;
+    text-allow-overlap:true;
+
+    }
+     [zoom=18]{
+     text-size:18;
+              marker-width: 20;
+  marker-height: 20;
+    text-allow-overlap:true;
+
+    }
+}
+
+
+
+
+
+
+
+.orange-route {
+  line-width:1;
+  line-color:#B26200;
+}
+
+.blue-route{
+  line-width:1;
+  line-color:blue;
+}
+
+
+.black-route {
+  line-width:1;
+  line-color:black;
+}
+
+.green-route {
+  line-width:1;
+  line-color:green;
+}
+.red-route {
+  line-width:1;
+  line-color:red;
+  [routelabel="Razor rock"] {
+    line-color:black;
+  }
+}
+
+
+.mtb-labels[zoom>=13][zoom<=18]{
+  text-name:'[routelabel]';
+  text-face-name:@sans;
+  text-placement-type: simple;
+  text-placement: point;
+  //text-fill:@road_text;
+  text-halo-fill:@road_halo;
+  text-halo-radius:0.5;
+text-placements: "E,NE,SE,W,NW,SW,W";
+   [zoom=13] {
+    text-size:11;
+    text-allow-overlap:false;
+
+  }
+  [zoom=14] {
+    text-size:12;
+    text-allow-overlap:false;
+
+  }
+  [zoom=15]{
+    text-size:13;
+text-allow-overlap:true;
+   }
+   [zoom=16]{
+		text-size:14;
+    text-allow-overlap:true;
+    }
+     [zoom=17]{
+     text-size:16 ;
+    text-allow-overlap:true;
+
+    }
+     [zoom=18]{
+     text-size:18;
+    text-allow-overlap:true;
+
+    }
+}
+
+

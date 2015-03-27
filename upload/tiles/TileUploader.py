@@ -11,7 +11,7 @@ import glob
 import os.path
 
 def readMbtileDBAndWriteToFiles():
-    conn = sqlite3.connect('18hi.mbtiles')
+    conn = sqlite3.connect('/home/murray/glentressfull.mbtiles')
     with conn:
     
         conn.row_factory = sqlite3.Row
@@ -29,7 +29,7 @@ def readMbtileDBAndWriteToFiles():
             tileName =  "z%sx%sy%s" % (z,x,invertedY)
             print tileName
             tileName = tileName + ext
-            tileName = "tmp/" + tileName
+            tileName = "/home/murray/temp-tiles/" + tileName
             with open(tileName, 'wb') as output_file:
                 output_file.write(row["tile_data"])
                 
@@ -38,7 +38,7 @@ def readMbtileDBAndWriteToFiles():
 
 def uploadTiles():
 
-    files = glob.glob("tmp/*png") 
+    files = glob.glob("/home/murray/temp-tiles/*png") 
     for f in files:
         uploadToDataStore(f)
     
@@ -46,7 +46,8 @@ def uploadTiles():
 def uploadToDataStore(tileName):
     #r = requests.get('http://google.com')
     #unicode.capitalize()
-    url = 'http://automatic-asset-782.appspot.com/index.jsp'
+    print tileName
+    url = 'http://praxis-cab-89616.appspot.com/index.jsp'
     #url = 'http://localhost:8888/index.jsp'
     txtParsePostUrl = requests.get(url)
     match = re.search(r'action="(.*?)"', txtParsePostUrl.text)
@@ -61,7 +62,7 @@ def uploadToDataStore(tileName):
         
     
     r = requests.post(postUrl, files=files)
-    print r.text
+    
     
 #readMbtileDBAndWriteToFiles()
 
